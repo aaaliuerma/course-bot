@@ -1,0 +1,42 @@
+{
+  "_说明": "复制本文件为 config.json 后修改。留空字符串表示自动探测。config.json 含凭据，必须在 .gitignore 里。",
+
+  "ocs": {
+    "_browserName": "要启动的 OCS 浏览器名字。找不到时退回列表里第一个。",
+    "browserName": "",
+    "exePath": "",
+    "chromePath": ""
+  },
+
+  "zerror": {
+    "_说明": "题库服务。exePath 留空则自动探测安装位置。",
+    "exePath": "",
+    "port": 3000
+  },
+
+  "accounts": {
+    "_说明": "各平台账号密码。login.ps1 按平台 id 取用。留空则该平台必须手动登录一次。",
+    "chaoxing": { "user": "", "pass": "" },
+    "zhihuishu": { "user": "", "pass": "" },
+    "icourse163": { "user": "", "pass": "" },
+    "icve": { "user": "", "pass": "" },
+    "zjy": { "user": "", "pass": "" },
+    "yuketang": { "user": "", "pass": "" }
+  },
+
+  "loginLayout": {
+    "_说明": "登录页各控件位置（相对页面 0~1）。首次跑 login.ps1 会截图让你标定，标完填这里。没有对应平台的段就表示还没标定。"
+  },
+
+  "calibration": {
+    "_说明": "OCS 3.x 起走 UIA 按名字定位按钮，这里不读；只有 OCS 2.x（UIA 不可见）才用这套兜底像素。",
+    "ocsBrowserRun": { "right": 77, "top": 272 },
+    "zErrorStartBtn": { "right": 126, "top": 104 }
+  },
+
+  "behavior": {
+    "_说明": "启动后等待窗口出现的上限（秒）。机器慢就调大。",
+    "windowWaitSeconds": 25,
+    "browserBootSeconds": 25
+  }
+}

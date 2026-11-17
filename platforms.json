@@ -1,0 +1,112 @@
+{
+    "_说明":  "各网课平台的入口速查表。只存入口 URL 和识别特征，不存点击路径——路径由 AI 现场看截图决定，写死会随前端改版失效。",
+    "_verified含义":  "true = 实测过入口可用；false = 空壳，用到时现场补",
+    "platforms":  [
+                      {
+                          "id":  "chaoxing",
+                          "name":  "超星学习通",
+                          "verified":  true,
+                          "entry":  "https://i.chaoxing.com/base",
+                          "loginUrl":  "https://passport2.chaoxing.com/login",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "个人空间",
+                                                               "我的课程",
+                                                               "超星",
+                                                               "课表"
+                                                           ],
+                                         "urlContains":  [
+                                                             "chaoxing"
+                                                         ]
+                                     },
+                          "knownUrls":  {
+                                            "inbox":  "https://i.chaoxing.com/base",
+                                            "workDetail":  "https://mooc1-api.chaoxing.com/mooc-ans/mooc2/work"
+                                        },
+                          "notes":  "导航页点『超星学习通』落到 chaoxing.com 首页；再输 i.chaoxing.com/base 才是个人空间。作业在左侧『收件箱』→ 作业通知 → 通知里的作业卡片。"
+                      },
+                      {
+                          "id":  "zhihuishu",
+                          "name":  "知道智慧树",
+                          "verified":  false,
+                          "entry":  "https://www.zhihuishu.com",
+                          "loginUrl":  "https://passport.zhihuishu.com/login",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "智慧树"
+                                                           ],
+                                         "urlContains":  [
+                                                             "zhihuishu"
+                                                         ]
+                                     },
+                          "notes":  "未验证。用到时先跑 ocs-session.ps1 shot 看页面，再补 entry 与特征。"
+                      },
+                      {
+                          "id":  "icve",
+                          "name":  "智慧职教（MOOC学院）",
+                          "verified":  false,
+                          "entry":  "https://www.icve.com.cn",
+                          "loginUrl":  "",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "智慧职教",
+                                                               "职教"
+                                                           ],
+                                         "urlContains":  [
+                                                             "icve"
+                                                         ]
+                                     },
+                          "notes":  "未验证。注意和「职教云」是不同站点。"
+                      },
+                      {
+                          "id":  "zjy",
+                          "name":  "职教云",
+                          "verified":  false,
+                          "entry":  "https://zjy2.icve.com.cn",
+                          "loginUrl":  "",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "职教云"
+                                                           ],
+                                         "urlContains":  [
+                                                             "zjy",
+                                                             "icve"
+                                                         ]
+                                     },
+                          "notes":  "未验证。"
+                      },
+                      {
+                          "id":  "icourse163",
+                          "name":  "中国大学MOOC",
+                          "verified":  false,
+                          "entry":  "https://www.icourse163.org",
+                          "loginUrl":  "https://www.icourse163.org/member/login.htm",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "我的课程",
+                                                               "个人中心"
+                                                           ],
+                                         "urlContains":  [
+                                                             "icourse163"
+                                                         ]
+                                     },
+                          "notes":  "未验证。"
+                      },
+                      {
+                          "id":  "yuketang",
+                          "name":  "雨课堂",
+                          "verified":  false,
+                          "entry":  "https://www.yuketang.cn",
+                          "loginUrl":  "",
+                          "detect":  {
+                                         "titleContains":  [
+                                                               "雨课堂"
+                                                           ],
+                                         "urlContains":  [
+                                                             "yuketang"
+                                                         ]
+                                     },
+                          "notes":  "未验证。"
+                      }
+                  ]
+}
