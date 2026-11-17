@@ -2,7 +2,7 @@
 
 把网课平台上的**作业**和**刷课**交给本机自动化：AI 负责把环境拉起来、登录、导航、盯进度和验收，页面上真正做题和看视频的是 [OCS](https://docs.ocsjs.com/) 的用户脚本，答题用的本地 AI 题库是 [ZError](https://app.zerror.cc/)。
 
-你不用记命令，只要对 DeepSeek Harness 说一句：
+你不用记命令，只要对 Agent说一句：
 
 > 配置我 GitHub 上的这个项目，然后帮我做学习通上那个作业
 
