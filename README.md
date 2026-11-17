@@ -26,6 +26,7 @@
 | `login.ps1` | 登录检查（三态）+ 自动填账号密码 |
 | `run.ps1` | 一条命令走完「起环境 → 打开平台」 |
 | `verify.ps1` | 盯进度 + 验收：定时截图、帧间像素差异、静止告警 |
+| `install-skill.ps1` | 把 SKILL.md 注册成 DSH 技能，AI/IM 机器人说「做网课作业」自动路由 |
 
 支持平台见 [`platforms.json`](./platforms.json)：超星学习通、知道智慧树、智慧职教、职教云、中国大学MOOC、雨课堂。**除学习通外均标注 `verified: false`**——入口地址未经实测，用到的平台需要现场截图校正。
 
@@ -82,6 +83,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\login.ps1 -Platform chaoxi
 .\verify.ps1 -Watch              # 盯进度
 ```
 
+### 5. 注册成 DSH 技能（可选，给 AI / IM 机器人用）
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-skill.ps1
+```
+
+装完后，任何 DSH 会话（含 QQ/微信 IM 机器人）里说「帮我做网课作业/刷课」就会自动按 SKILL.md 干活。
+仓库更新后用 `.\install-skill.ps1 -Force` 把已注册技能同步到新版本。
+
 ## 前置要求
 
 - Windows 10/11，PowerShell 5.1+
@@ -103,6 +113,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\login.ps1 -Platform chaoxi
 ├── login.ps1              # 登录
 ├── run.ps1                # 一键起环境
 ├── verify.ps1             # 盯进度/验收
+├── install-skill.ps1      # 注册 DSH 技能（AI/IM 机器人自动路由）
 └── js/                    # 早期用的浏览器内探测脚本（备用）
 ```
 
@@ -126,6 +137,19 @@ ZError 是 Tauri + WebView2，UIA 能读到按钮（55 个元素），可以用 
 - 撞到滑块验证码需要人工
 - 按钮坐标只对 OCS 2.x 有意义；3.9.1 走 UIA 按名字定位，不需要标定。换到 2.x 才需要跑 `chaoxing.ps1 calibrate`
 - 只做过超星学习通的端到端验证
+
+## 接到 IM 机器人（手机派单）
+
+完整闭环：手机收到学习通通知 → 截图发给 QQ/微信里的 DSH 机器人 → 机器人按本仓库
+SKILL.md 在电脑上做完 → 验收截图发回手机。需要四个条件：
+
+1. DSH 装好 `@xmanrui/dsh-im` 并绑定 QQ/微信渠道（设置 → IM机器人）；
+2. 跑过上面第 5 步的 `install-skill.ps1` 注册技能；
+3. **会话模型必须支持图像输入**——通知截图和验收图都靠读图，纯文本模型跑不了；
+4. 电脑保持开机、不锁屏、不睡眠（UI 自动化在锁屏下无效）。
+
+刷课是小时级长任务：让机器人用后台任务跑 `verify.ps1 -Watch` 并定时回传进度，
+不要占着一个对话回合干等。撞到滑块/人脸识别，机器人应截图回传请你人工处理。
 
 ## 免责
 

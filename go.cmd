@@ -18,6 +18,7 @@ rem    go.cmd start          same as chaoxing.ps1 start
 rem    go.cmd login          same as login.ps1 -Platform chaoxing
 rem    go.cmd verify         same as verify.ps1 -Shot
 rem    go.cmd setup          same as install-deps.ps1 all
+rem    go.cmd skill          same as install-skill.ps1
 rem ===========================================================
 setlocal
 cd /d "%~dp0"
@@ -36,13 +37,14 @@ if /i "%~1"=="start"  ( %PS% "%~dp0chaoxing.ps1" start    & goto :end )
 if /i "%~1"=="login"  ( %PS% "%~dp0login.ps1" -Platform chaoxing & goto :end )
 if /i "%~1"=="verify" ( %PS% "%~dp0verify.ps1" -Shot     & goto :end )
 if /i "%~1"=="setup"  ( %PS% "%~dp0install-deps.ps1" all & goto :end )
+if /i "%~1"=="skill"  ( %PS% "%~dp0install-skill.ps1" & goto :end )
 
 rem Unknown subcommand: fail loudly instead of silently running the full pipeline.
 rem Args starting with "-" are passed through to run.ps1 (e.g. go.cmd -Platform zhihuishu).
 set "ARG=%~1"
 if "%ARG:~0,1%"=="-" ( %PS% "%~dp0run.ps1" %* & goto :end )
 echo [go.cmd] Unknown command: %ARG%
-echo Usage: go.cmd [probe^|check^|status^|start^|login^|verify^|setup]
+echo Usage: go.cmd [probe^|check^|status^|start^|login^|verify^|setup^|skill]
 echo        go.cmd -Platform ^<id^>   (pass args to run.ps1)
 exit /b 1
 

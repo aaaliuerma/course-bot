@@ -1,4 +1,4 @@
-﻿---
+---
 name: ocs-course-bot
 description: 用 OCS Desktop + ZError 题库托管网课作业与刷课。当用户要求"帮我做网课作业/刷课"、发来学习通等平台的作业通知截图、或要求在 Windows 上配置这套自动化时使用。
 ---
@@ -6,6 +6,11 @@ description: 用 OCS Desktop + ZError 题库托管网课作业与刷课。当用
 # 网课作业 / 刷课 托管
 
 用 **OCS Desktop**（浏览器多开 + 用户脚本宿主）和 **ZError**（本地 AI 题库服务）搭一套网课自动化。分工是：**你负责把环境拉起来、登录、导航、监督、验收；OCS 的用户脚本负责在页面里真正刷课和答题。**
+
+> **先找到项目目录**：本文所有命令都在 course-bot 仓库目录里执行。
+> 用户给过本地路径就用它；否则在工作区找 `course-bot` 目录；再没有就问用户，
+> 或先克隆：`git clone https://github.com/aaaliuerma/course-bot.git`。
+> 会话模型**必须支持图像输入**——本技能的核心循环是读截图，纯文本模型跑不了。
 
 ---
 
@@ -24,7 +29,7 @@ FullyQualifiedErrorId : UnauthorizedAccess
 powershell -NoProfile -ExecutionPolicy Bypass -File .\chaoxing.ps1 discover
 ```
 
-或者让用户双击仓库里的 **`go.cmd`**（已内置 Bypass，还支持 `go.cmd probe|login|status|verify|setup` 子命令）。
+或者让用户双击仓库里的 **`go.cmd`**（已内置 Bypass，还支持 `go.cmd probe|check|login|status|start|verify|setup|skill` 子命令）。
 
 > 本文档后面出现 `.\xxx.ps1` 的地方，一律按上面这种带 Bypass 的形式理解。**这是 100% 会撞上的第一道墙，先过它。**
 
@@ -191,6 +196,7 @@ A 道拿不到 DOM，所以验收靠**截图 + 像素差异 + 目视判断**三�
 ### 阶段 ⑤ 汇报
 
 告诉用户：做了什么、结果如何、证据在哪张截图。别只说「已完成」。
+在 IM 会话（QQ/微信机器人）里，用宿主的 IM 文件回传能力把验收截图发回用户手机，附一句结论。
 
 ---
 
